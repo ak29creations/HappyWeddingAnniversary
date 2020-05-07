@@ -1,50 +1,3 @@
-<?php session_start(); ?>
-<script src='https://www.google.com/recaptcha/api.js'></script>
-
-<?php
-$Success = FALSE;
-if (isset($_POST['Submit'])) {
-    // $valid = validateContact();
-    // if ($valid == '') {
-    $Name = htmlentities(str_replace("'", "`", $_POST['Name']));
-    $phone = htmlentities(str_replace("'", "`", $_POST['Phone']));
-    $email = htmlentities(str_replace("'", "`", $_POST['Email']));
-    $subject = htmlentities(str_replace("'", "`", $_POST['Subject']));
-    $message = htmlentities(str_replace("'", "`", $_POST['Message']));
-
-    $recaptcha = $_POST['g-recaptcha-response'];
-    if (!empty($recaptcha)) {
-
-        $n = "\n";
-        $to = "aswin.caxigo@gmail.com";
-        $subject = "Feedback";
-        $message = "Name : " . $Name . $n . "Phone : " . $phone . $n . "E mail : " . $email . $n . "Subject: " . $subject . $n . "Message : " . $message;
-        $from = $email;
-        $headers = "X-Priority: 2\nX-MSmail-Priority: high";
-        if (mail($to, $subject, $message, $headers, $from)) {
-            $Success = TRUE;
-            $Message = "Mail Sent Successfully";
-            //echo $Message;
-            echo "<script> location.href='index.html'; </script>";
-            exit;        
-        } else {
-            $Message = "Mail Sent Failed";
-            //echo $Message;
-            echo "<script> location.href='index.html'; </script>";
-            exit;        
-        }
-        // } else {
-        //     $valid = "Sorry, the CAPTCHA code entered was incorrect!";
-        // }
-        session_destroy();
-        //  }
-        // $valid;
-    } else {
-        echo "<script> location.href='index.html'; </script>";
-        exit;    
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -270,9 +223,6 @@ if (isset($_POST['Submit'])) {
 				<input type="email" class="name" name="Email" placeholder="Email" required="">
 				<input type="text" class="name" name="Subject" placeholder="Subject" required="">
 				<textarea name="Message" placeholder="Your Message" required=""></textarea>
-				<div class="form-group">
-                <div class="g-recaptcha" data-sitekey="6LeL6fMUAAAAADYIx_8f8L9fkbpa3WCK-DJV8iXG"></div>
-                </div>
 				<input type="submit" name="Submit" value="SEND MESSAGE">
 			</form>
 		</div>
