@@ -1,3 +1,38 @@
+<?php session_start(); ?>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+<?php
+$Success = FALSE;
+if (isset($_POST['Submit'])) {
+
+    $Name = htmlentities(str_replace("'", "`", $_POST['Name']));
+    $phone = htmlentities(str_replace("'", "`", $_POST['Phone']));
+    $email = htmlentities(str_replace("'", "`", $_POST['Email']));
+    $subject = htmlentities(str_replace("'", "`", $_POST['Subject']));
+    $message = htmlentities(str_replace("'", "`", $_POST['Message']));
+
+        $n = "\n";
+        $to = "aswin.caxigo@gmail.com";
+        $subject = "Feedback  Details";
+        $message = "Name : " . $Name . $n . "Phone : " . $phone . $n . "E mail : " . $email . $n . "Subject: " . $subject . $n . "Message : " . $message;
+        $from = $email;
+        $headers = "X-Priority: 2\nX-MSmail-Priority: high";
+        if (mail($to, $subject, $message, $headers, $from)) {
+            $Success = TRUE;
+            $Message = "Mail Sent Successfully";
+            echo $Message;
+            echo "<script> location.href='index.html'; </script>";
+            exit;        
+        } else {
+            $Message = "Mail Sent Failed";
+            echo $Message;
+            echo "<script> location.href='contact.php'; </script>";
+            exit;        
+        }
+        
+        session_destroy();
+        }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -123,94 +158,7 @@
 	</div>
 	<!-- //home -->
 
-	<!-- gallery -->
-	<div class="gallery_wthree" id="gallery">
-		<div class="container">
-			<h3 class="title">gallery</h3>
-			<div class="gallery_grid agleits_w3layouts">
-				<div class="col-md-12  col-sm-12 col-12 grid_w3">
-					<div class="sub_grid gallery_w3l">
-					
-						<div class="col-md-6 col-sm-6 col-xs-6 grid-1 grid-c grid_w3l">
-							<a class="cm-overlay" href="images/4.jpg">
-								<img src="images/4.jpg" alt=" " class="img-responsive" />
-								<div class="w3agile-text w3agile-text-small">
-								</div>
-							</a>
-						</div>
-						<div class="col-md-6 col-sm-6 col-xs-6 grid-1 grid-b grid_w3l">
-							<a class="cm-overlay" href="images/15.jpg">
-								<img src="images/15.jpg" alt=" " class="img-responsive" />
-								<div class="w3agile-text w3agile-text-smal1">
-								</div>
-							</a>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-					<div class="sub_grid gallery_w3l">
-					
-						<div class="col-md-6 col-sm-6 col-xs-6 grid-1 grid-c grid_w3l">
-							<a class="cm-overlay" href="images/14.jpg">
-								<img src="images/14.jpg" alt=" " class="img-responsive" />
-								<div class="w3agile-text w3agile-text-small">
-								</div>
-							</a>
-						</div>
-						<div class="col-md-6 col-sm-6 col-xs-6 grid-1 grid-b grid_w3l">
-							<a class="cm-overlay" href="images/16.jpg">
-								<img src="images/16.jpg" alt=" " class="img-responsive" />
-								<div class="w3agile-text w3agile-text-smal1">
-								</div>
-							</a>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-			</div>
-				<div class="col-md-12  col-sm-12 col-12 grid_w3">
-					<div class="sub_grid gallery_w3l">
-					
-						<div class="col-md-6 col-sm-6 col-xs-6 grid-1 grid-c grid_w3l">
-							<a class="cm-overlay" href="images/.jpg">
-								<img src="images/.jpg" alt=" " class="img-responsive" />
-								<div class="w3agile-text w3agile-text-small">
-								</div>
-							</a>
-						</div>
-						<div class="col-md-6 col-sm-6 col-xs-6 grid-1 grid-b grid_w3l">
-							<a class="cm-overlay" href="images/.jpg">
-								<img src="images/.jpg" alt=" " class="img-responsive" />
-								<div class="w3agile-text w3agile-text-smal1">
-								</div>
-							</a>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-					<div class="sub_grid gallery_w3l">
-					
-						<div class="col-md-6 col-sm-6 col-xs-6 grid-1 grid-c grid_w3l">
-							<a class="cm-overlay" href="images/13.jpg">
-								<img src="images/13.jpg" alt=" " class="img-responsive" />
-								<div class="w3agile-text w3agile-text-small">
-								</div>
-							</a>
-						</div>
-						<div class="col-md-6 col-sm-6 col-xs-6 grid-1 grid-b grid_w3l">
-							<a class="cm-overlay" href="images/7.jpg">
-								<img src="images/7.jpg" alt=" " class="img-responsive" />
-								<div class="w3agile-text w3agile-text-smal1">
-								</div>
-							</a>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-			
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
-	<!-- //gallery -->
+	
 <!-- contact --> 
 <div class="contact-w3-agileits" id="contact">
 	<div class="contact-main">
