@@ -1,19 +1,39 @@
 <?php
 if (isset($_POST['Submit'])) {
 
-    $Name = $_POST['Name'];
-    $phone = $_POST['Phone'];
-    $email = $_POST['Email'];
-    $subject = $_POST['Subject'];
-    $message = $_POST['Message'];
+	require 'PHPMailerAutoload.php';
+	require 'credential.php';
 
-        $n = "\n";
-        $to = "aswin.caxigo@gmail.com";
-		$message = "Name : " . $Name . $n . "Phone : " . $phone . $n . "E mail : " . $email . $n . "Subject: " . $subject . $n . "Message : " . $message;
-		$headers = "From: $email \r\n";
 
-        mail($to, $subject, $message, $headers);
-        header("Location :index.html")
+	$mail = new PHPMailer;
+	
+	$mail->SMTPDebug = 4;                               // Enable verbose debug output
+	
+	$mail->isSMTP();                                      // Set mailer to use SMTP
+	$mail->Host = 'smtp.gmail.com;';  // Specify main and backup SMTP servers
+	$mail->SMTPAuth = true;                               // Enable SMTP authentication
+	$mail->Username = EMAIL;                 // SMTP username
+	$mail->Password = PASS;                           // SMTP password
+	$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+	$mail->Port = 587;                                    // TCP port to connect to
+	
+	$mail->setFrom(EMAIL, 'AK');
+	$mail->addAddress($_POST['Email']);     // Add a recipient
+	$mail->addReplyTo(EMAIL);
+	
+	
+	$mail->isHTML(true);                                  // Set email format to HTML
+	
+	$mail->Subject = $_POST['Subject'];
+	$mail->Body    = '<div style="border:2px solid red;">This is the HTML message body <b>in bold!</b></div>';
+	$mail->AltBody = $_POST['Message'];
+	
+	if(!$mail->send()) {
+		echo 'Message could not be sent.';
+		echo 'Mailer Error: ' . $mail->ErrorInfo;
+	} else {
+		echo 'Message has been sent';
+	}
         
         }
 ?>
