@@ -9,11 +9,11 @@ if (isset($_POST['Submit'])) {
 
         $n = "\n";
         $to = "aswin.caxigo@gmail.com";
-		$headers = "From: ".$email;
 		$message = "Name : " . $Name . $n . "Phone : " . $phone . $n . "E mail : " . $email . $n . "Subject: " . $subject . $n . "Message : " . $message;
+		$headers = "From: $email \r\n";
 
         mail($to, $subject, $message, $headers);
-        header("Location :index.html?mailsend")
+        header("Location :index.html")
         
         }
 ?>
