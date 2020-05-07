@@ -1,3 +1,50 @@
+<?php session_start(); ?>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+<?php
+$Success = FALSE;
+if (isset($_POST['Submit'])) {
+    // $valid = validateContact();
+    // if ($valid == '') {
+    $Name = htmlentities(str_replace("'", "`", $_POST['Name']));
+    $phone = htmlentities(str_replace("'", "`", $_POST['Phone']));
+    $email = htmlentities(str_replace("'", "`", $_POST['Email']));
+    $subject = htmlentities(str_replace("'", "`", $_POST['Subject']));
+    $message = htmlentities(str_replace("'", "`", $_POST['Message']));
+
+    $recaptcha = $_POST['g-recaptcha-response'];
+    if (!empty($recaptcha)) {
+
+        $n = "\n";
+        $to = "aswin.caxigo@gmail.com";
+        $subject = "Feedback";
+        $message = "Name : " . $Name . $n . "Phone : " . $phone . $n . "E mail : " . $email . $n . "Subject: " . $subject . $n . "Message : " . $message;
+        $from = $email;
+        $headers = "X-Priority: 2\nX-MSmail-Priority: high";
+        if (mail($to, $subject, $message, $headers, $from)) {
+            $Success = TRUE;
+            $Message = "Mail Sent Successfully";
+            //echo $Message;
+            echo "<script> location.href='index.php'; </script>";
+            exit;        
+        } else {
+            $Message = "Mail Sent Failed";
+            //echo $Message;
+            echo "<script> location.href='index.php'; </script>";
+            exit;        
+        }
+        // } else {
+        //     $valid = "Sorry, the CAPTCHA code entered was incorrect!";
+        // }
+        session_destroy();
+        //  }
+        // $valid;
+    } else {
+        echo "<script> location.href='index.php'; </script>";
+        exit;    
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -211,7 +258,29 @@
 		</div>
 	</div>
 	<!-- //gallery -->
-
+<!-- contact --> 
+<div class="contact-w3-agileits" id="contact">
+	<div class="contact-main">
+		<div class="col-md-12 col-sm-12 col-12 contact-right-w3l">
+			<h1 style="color:rgb(12, 12, 36);">Contact Me</h1>
+			<br>
+			<form action="index.php" method="post">
+				<input type="text" class="name" name="Name" placeholder="Name" required="">
+				<input type="text" class="name" name="Phone" placeholder="Phone" required="">
+				<input type="email" class="name" name="Email" placeholder="Email" required="">
+				<input type="text" class="name" name="Subject" placeholder="Subject" required="">
+				<textarea name="Message" placeholder="Your Message" required=""></textarea>
+				<div class="form-group">
+                <div class="g-recaptcha" data-sitekey="6LeL6fMUAAAAADYIx_8f8L9fkbpa3WCK-DJV8iXG"></div>
+                </div>
+				<input type="submit" name="Submit" value="SEND MESSAGE">
+			</form>
+		</div>
+		
+		<div class="clearfix"></div>
+  </div>
+</div>	
+<!-- //contact --> 
 
 
 
