@@ -26,7 +26,7 @@ if (isset($_POST['Submit'])) {
         } else {
             $Message = "Mail Sent Failed";
             echo $Message;
-            echo "<script> location.href='contact.php'; </script>";
+            echo "<script> location.href='index.html'; </script>";
             exit;        
         }
         
