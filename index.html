@@ -25,12 +25,12 @@ if (isset($_POST['Submit'])) {
             $Success = TRUE;
             $Message = "Mail Sent Successfully";
             //echo $Message;
-            echo "<script> location.href='index.php'; </script>";
+            echo "<script> location.href='index.html'; </script>";
             exit;        
         } else {
             $Message = "Mail Sent Failed";
             //echo $Message;
-            echo "<script> location.href='index.php'; </script>";
+            echo "<script> location.href='contact.php'; </script>";
             exit;        
         }
         // } else {
@@ -40,7 +40,7 @@ if (isset($_POST['Submit'])) {
         //  }
         // $valid;
     } else {
-        echo "<script> location.href='index.php'; </script>";
+        echo "<script> location.href='index.html'; </script>";
         exit;    
     }
 }
