@@ -12,7 +12,8 @@
 	<!-- //custom-theme -->
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	<!-- stylesheet -->
-	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- //stylesheet -->
 	<!-- online fonts -->
@@ -97,7 +98,8 @@
 					<ul class="nav navbar-nav linkEffects linkHoverEffect_11 custom-menu">
 						<li class="agile_active"><a href="index.html" class="scroll"><span>home</span></a></li>
 						<li><a href="#gallery" class="scroll"><span>gallery </span></a></li>
-					</ul>
+						<li><a href="#contact" class="scroll"><span>Contact</span></a></li>
+                   </ul>
 				</div>
 			</div>
 		</nav>
@@ -211,7 +213,46 @@
 		</div>
 	</div>
 	<!-- //gallery -->
-
+<!-- contact --> 
+<div class="contact-w3-agileits" id="contact">
+	<div class="contact-main">
+		<div class="col-md-7 col-sm-7 col-xs-7 contact-right-w3l">
+			<form id="submit-form" action="">
+				<input type="text" class="name" id="FirstName" name="FirstName" placeholder="First Name" required="">
+				<input type="text" class="name" id="LastName" name="LastName" placeholder="Last Name" required="">
+				<input type="email" class="name" id="Email" name="Email" placeholder="Email" required="">
+				<input type="text" class="name" id="Subject" name="Subject" placeholder="Subject" required="">
+				<textarea id="Message" name="Message" placeholder="Your Message" required=""></textarea>
+				<input type="submit" value="SEND">
+			</form>
+		</div>
+		<div class="col-md-5 col-sm-5 col-xs-5 contact-left-w3ls">
+			<div class="mail contact-grid-agileinfo">
+				<div class="col-md-1 col-sm-2 col-xs-2 contact-icon-wthree">
+					<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+				</div>
+				<div class="col-md-11 col-sm-9 col-xs-9 contact-text-agileinfo">
+					<h4>Mail Me</h4>
+					<p><a href="mailto:info@example.com">aswinkesavan26@gmail.com</a></p>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="call contact-grid-agileinfo">
+				<div class="col-md-1 col-sm-2 col-xs-2 contact-icon-wthree">
+					<span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
+				</div>
+				<div class="col-md-11 col-sm-9 col-xs-9 contact-text-agileinfo">
+					<h4>Call Me</h4>
+					<p>+91-9447623307</p>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			
+		</div>
+		<div class="clearfix"></div>
+  </div>
+</div>	
+<!-- //contact --> 
 
 
 
@@ -253,6 +294,23 @@
 				$('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
 			});
 		});
+		$("#submit-form").submit((e)=>{
+            e.preventDefault()
+            $.ajax({
+                url:"https://script.google.com/macros/s/AKfycbw0i_P72Hjd61X5uj1vK0opU9yWXWHL0jeIn4Vnv4pEnvTdL3xF/exec",
+                data:$("#submit-form").serialize(),
+                method:"post",
+                success:function (response){
+                    alert("Form submitted successfully")
+                    window.location.reload()
+                    //window.location.href="https://google.com"
+                },
+                error:function (err){
+                    alert("Something Error")
+    
+                }
+            })
+        })
 	</script>
 	<script src="js/SmoothScroll.min.js"></script>
 	<!-- //end-smooth-scrolling -->
